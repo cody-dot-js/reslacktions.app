@@ -6,6 +6,7 @@ import type { BasePageProps } from "types/BasePageProps";
 import { Page } from "types/PageLayout";
 import { name } from "config";
 import Image from "next/image";
+import { Button } from "components/Button";
 
 interface Props extends BasePageProps {
   meta: PageMeta;
@@ -22,6 +23,17 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Home: Page = () => {
+  const testGit = async () => {
+    try {
+      const res = await fetch("/api/git");
+      const json = await res.json();
+
+      console.log("test git success!", json);
+    } catch (e) {
+      console.error("test git error!", e);
+    }
+  };
+
   return (
     <>
       {/* copied from: https://github.com/tailwindlabs/tailwindcss-typography/blob/6566aa3b84e45ea873ead29f29158cf3ca9ca7aa/demo/components/MarkdownSample.mdx */}
@@ -31,6 +43,7 @@ const Home: Page = () => {
             <div className="space-y-10 sm:space-y-12 lg:space-y-20 xl:space-y-24">
               <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto">
                 <h1>{name}</h1>
+                <Button onClick={testGit}>Test Git</Button>
                 <p className="lead">
                   Until now, trying to style an article, document, or blog post
                   with Tailwind has been a tedious task that required a keen eye
